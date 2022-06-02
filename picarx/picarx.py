@@ -29,7 +29,7 @@ class Picarx(object):
                 servo_pins:list=['P0', 'P1', 'P2'], 
                 motor_pins:list=['D4', 'D5', 'P12', 'P13'],
                 grayscale_pins:list=['A0', 'A1', 'A2'],
-                ultrasonic_pins:list=['D2','D3'],
+                ultrasonic_pins:list=['D0','D1'],
                 config:str=config_file,
                 ):
 
