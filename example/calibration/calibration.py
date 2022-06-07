@@ -1,26 +1,26 @@
 #!/usr/bin/env python3
 from picarx import Picarx
 from time import sleep
-import readchar 
+import readchar
 
-#         ┌  ┐ └  ┘ ┌┐  ├    ┤    
+#         ┌  ┐ └  ┘ ┌┐  ├    ┤
 
 manual = '''
------ Picar-X Calibration Helper -------      
-                      
+----- Picar-X Calibration Helper -------
+
     1: direction servo
     2: camera servo 1
     3: camera servo 2
     4: left motor
     5: right motor
-    W: increase servo angle           
+    W: increase servo angle
     S: decrease servo angle
     Q: change motor direction
     E: motors run/stop
-    R: servos test 
+    R: servos test
     SPACE: confirm calibration
     Esc/Crtl+C: quit
-'''    
+'''
 
 px = Picarx()
 px_power = 10
@@ -34,13 +34,15 @@ motors_cali = px.cali_dir_value
 servos_offset = list.copy(servos_cali)
 motors_offset = list.copy(motors_cali)
 
+
 def servos_test():
     px.set_dir_servo_angle(-30)
     sleep(0.5)
     px.set_dir_servo_angle(30)
     sleep(0.5)
     px.set_dir_servo_angle(0)
-    sleep(0.5)   
+    sleep(0.5)
+
 
 def servos_move(servo_num, value):
     if servo_num == 0:
@@ -51,33 +53,36 @@ def servos_move(servo_num, value):
         px.set_camera_servo2_angle(value)
     sleep(0.2)
 
+
 def set_servos_offset(servo_num, value):
     if servo_num == 0:
         px.dir_cal_value = value
     elif servo_num == 1:
         px.cam_cal_value_1 = value
     elif servo_num == 2:
-        px.cam_cal_value_2  = value  
+        px.cam_cal_value_2 = value
+
 
 def servos_reset():
     for i in range(3):
-        servos_move(i,0)
+        servos_move(i, 0)
+
 
 def show_info():
     print("\033[H\033[J", end='')  # clear terminal windows
     print(manual)
-    print('[ %s ] [ %s ]'%(servo_names[servo_num], motor_names[motor_num])) 
-    print('offset: %s, %s'%(servos_offset, motors_offset))
+    print('[ %s ] [ %s ]' % (servo_names[servo_num], motor_names[motor_num]))
+    print('offset: %s, %s' % (servos_offset, motors_offset))
 
 
-def cali_helper(): 
+def cali_helper():
     global servo_num, motor_num
     global servos_cali, motors_cali, servos_offset, motors_offset
     motor_run = False
     step = 1
     # reset
     servos_reset()
-    # show_info 
+    # show_info
     show_info()
 
     # key control
@@ -85,7 +90,7 @@ def cali_helper():
         # readkey
         key = readchar.readkey()
         key = key.lower()
-        # select the servo 
+        # select the servo
         if key in ('123'):
             servo_num = int(key)-1
             show_info()
@@ -98,7 +103,7 @@ def cali_helper():
         elif key == 'w':
             servos_offset[servo_num] += step
             if servos_offset[servo_num] > 20:
-                servos_offset[servo_num] =20
+                servos_offset[servo_num] = 20
             show_info()
             # angle = servos_offset[servo_num] - servos_cali[servo_num]
             # print(1,angle)
@@ -116,7 +121,7 @@ def cali_helper():
             set_servos_offset(servo_num, servos_offset[servo_num])
             servos_move(servo_num, 0)
         # motors move
-        elif key == 'q': 
+        elif key == 'q':
             motors_offset[motor_num] = -1 * motors_offset[motor_num]
             px.cali_dir_value = list.copy(motors_offset)
             motor_run = True
@@ -139,20 +144,22 @@ def cali_helper():
                     px.dir_servo_angle_calibration(servos_offset[0])
                     px.camera_servo1_angle_calibration(servos_offset[1])
                     px.camera_servo2_angle_calibration(servos_offset[2])
-                    px.motor_direction_calibration(motor_num +1 , motors_offset[motor_num])
+                    px.motor_direction_calibration(
+                        motor_num + 1, motors_offset[motor_num])
                     sleep(0.2)
-                    servos_offset = [px.dir_cal_value, px.cam_cal_value_1, px.cam_cal_value_2]
+                    servos_offset = [px.dir_cal_value,
+                                     px.cam_cal_value_1, px.cam_cal_value_2]
                     show_info()
                     print('The calibration value has been saved.')
                     break
                 elif key == 'n':
                     show_info()
-                    break   
-                sleep(0.01) 
+                    break
+                sleep(0.01)
         # quit
         elif key == readchar.key.CTRL_C or key in readchar.key.ESCAPE_SEQUENCES:
             print('quit')
-            break 
+            break
         sleep(0.01)
 
 
