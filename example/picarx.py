@@ -142,7 +142,7 @@ class Picarx(object):
         self.set_motor_speed(1, speed)
         self.set_motor_speed(2, speed) 
 
-    def backward(self,speed):
+    def forward(self,speed):
         current_angle = self.dir_current_angle
         if current_angle != 0:
             abs_current_angle = abs(current_angle)
@@ -161,7 +161,7 @@ class Picarx(object):
             self.set_motor_speed(1, -1*speed)
             self.set_motor_speed(2, speed)  
 
-    def forward(self,speed):
+    def backward(self,speed):
         current_angle = self.dir_current_angle
         if current_angle != 0:
             abs_current_angle = abs(current_angle)

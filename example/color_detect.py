@@ -5,6 +5,8 @@ import numpy as np
 from picamera import PiCamera
 from picamera.array import PiRGBArray
 import cv2
+from vilib import Vilib
+import time
 print(
     'Please run under desktop environment (eg: vnc) to display the image window')
 
@@ -12,8 +14,6 @@ print(
 # We have integrated the camera-related functions into the vilb library,
 # you can use the following code to achieve the same functionality.
 
-from vilib import Vilib
-import time
 
 def main():
 
@@ -63,9 +63,9 @@ def color_detect(img, color_name):
     # inRange()：Make the ones between lower/upper white, and the rest black
     mask = cv2.inRange(hsv, np.array([min(color_dict[color_type]), 60, 60]), np.array(
         [max(color_dict[color_type]), 255, 255]))
-    if color_type == 'red':
+    if color_type == 'yellow':
         mask_2 = cv2.inRange(
-            hsv, (color_dict['red_2'][0], 0, 0), (color_dict['red_2'][1], 255, 255))
+            hsv, (color_dict['yellow'][0], 0, 0), (color_dict['yellow'][1], 255, 255))
         mask = cv2.bitwise_or(mask, mask_2)
 
     # Perform an open operation on the image
@@ -114,7 +114,7 @@ with PiCamera() as camera:
     for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
         img = frame.array
         img, img_2, img_3 = color_detect(
-            img, 'red')  # Color detection function
+            img, 'yellow')  # Color detection function
         cv2.imshow("video", img)    # OpenCV image show
         cv2.imshow("mask", img_2)    # OpenCV image show
         cv2.imshow("morphologyEx_img", img_3)    # OpenCV image show

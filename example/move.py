@@ -5,7 +5,7 @@ import time
 if __name__ == "__main__":
     try:
         px = Picarx()
-        px.backward(30)
+        px.forward(30)
         time.sleep(0.5)
         for angle in range(0,35):
             px.set_dir_servo_angle(angle)
