@@ -1,4 +1,8 @@
-from lib import Servo, PWM, Pin, ADC
+from lib.servo import Servo
+from lib.pwm import PWM
+from lib.pin import Pin
+from lib.adc import ADC
+
 import numpy as np
 from vilib import Vilib
 import time

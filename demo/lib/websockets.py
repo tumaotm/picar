@@ -10,7 +10,7 @@ import time
 import json
 
 import RPi.GPIO as GPIO
-from ezblock import Pin,Servo,PWM
+from lib import Pin,Servo,PWM
 from .utils import delay,getIP, run_command, log
 from .ble import BLE
 from configparser import ConfigParser
