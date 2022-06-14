@@ -4,7 +4,7 @@ from picarx import Picarx
 if __name__=='__main__':
   try:
     px = Picarx()
-    # px = Picarx(grayscale_pins=['A0', 'A1', 'A2']) 
+    # px = Picarx(grayscale_pins=['A0', 'A1', 'A2'])
     px_power = 10
     while True:
         gm_val_list = px.get_grayscale_data()
@@ -14,15 +14,15 @@ if __name__=='__main__':
 
         if gm_status == 'forward':
             print(1)
-            px.forward(px_power) 
+            px.forward(px_power)
 
         elif gm_status == 'left':
             px.set_dir_servo_angle(12)
-            px.forward(px_power) 
+            px.forward(px_power)
 
         elif gm_status == 'right':
             px.set_dir_servo_angle(-12)
-            px.forward(px_power) 
+            px.forward(px_power)
         else:
             px.set_dir_servo_angle(0)
             px.stop()

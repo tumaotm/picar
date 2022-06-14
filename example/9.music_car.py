@@ -5,14 +5,14 @@ from ezblock import __reset_mcu__
 import time
 __reset_mcu__()
 time.sleep(0.01)
-from picarmini import set_dir_servo_angle
-from picarmini import dir_servo_angle_calibration
+from picarx import set_dir_servo_angle
+from picarx import dir_servo_angle_calibration
 from Music import *
 from ezblock import Pin
 from ezblock import Ultrasonic
-from picarmini import forward
+from picarx import forward
 from ezblock import delay
-from picarmini import backward
+from picarx import backward
 
 
 

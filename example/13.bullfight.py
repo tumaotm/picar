@@ -6,15 +6,15 @@ import time
 __reset_mcu__()
 time.sleep(0.01)
 from vilib import Vilib
-from picarmini import dir_servo_angle_calibration
-from picarmini import camera_servo1_angle_calibration
-from picarmini import camera_servo2_angle_calibration
+from picarx import dir_servo_angle_calibration
+from picarx import camera_servo1_angle_calibration
+from picarx import camera_servo2_angle_calibration
 from ezblock import delay
 from ezblock import constrain
-from picarmini import set_camera_servo1_angle
-from picarmini import set_dir_servo_angle
-from picarmini import forward
-from picarmini import stop
+from picarx import set_camera_servo1_angle
+from picarx import set_dir_servo_angle
+from picarx import forward
+from picarx import stop
 from ezblock import WiFi
 
 

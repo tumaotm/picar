@@ -5,10 +5,10 @@ from ezblock import __reset_mcu__
 import time
 __reset_mcu__()
 time.sleep(0.01)
-from picarmini import dir_servo_angle_calibration
-from picarmini import set_dir_servo_angle
-from picarmini import forward
-from picarmini import stop
+from picarx import dir_servo_angle_calibration
+from picarx import set_dir_servo_angle
+from picarx import forward
+from picarx import stop
 from ezblock import ADC
 
 
